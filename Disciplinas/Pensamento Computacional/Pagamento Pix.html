@@ -1,0 +1,262 @@
+
+<!-- saved from url=(0043)https://sia.estacio.br/pix/pagamentoPix.asp -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+
+	  <link rel="icon" href="https://sia.estacio.br/pix/imgs/favicon.ico">		
+
+
+    <title>Pagamento Pix</title>    
+    <link rel="stylesheet" href="./Pagamento Pix_files/bootstrap.min.css">
+  	<script src="./Pagamento Pix_files/jquery-3.3.1.min.js"></script>
+  	<script src="./Pagamento Pix_files/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./Pagamento Pix_files/app.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>	
+
+	var urlA = location.host;
+	var urlS = "";
+	var urlX = "";
+	
+	if( urlA.indexOf("dsiame") == 0 ){
+		urlS = "http://" + urlA + "/SIAServices/rest/Pix/InformacoesFinanceira";
+		urlX = "http://" + urlA + "/SIAServices/rest/Pix/";
+
+	}else{
+		urlS = "https://api.estacio.br/siaparceiros/pix/v1/InformacoesFinanceiras";
+		urlX = "https://api.estacio.br/siaparceiros/pix/v1/";
+	}
+
+	var myHeaders = new Headers();
+	myHeaders.append("Content-Type", "text/plain");
+	myHeaders.append("Cookie", "ASP.NET_SessionId=xqwmkc4vuacnjbltaajm3vw5");
+	myHeaders.append("apptoken", "i7fKe4o2Ii9K");
+	 
+	var urlFin = window.location.href;
+	var paramsBuscFin = new URLSearchParams(urlFin);
+	var numAlunoFin = "8953955";
+	var NumAlunoTurmaExtensaoFin = "";
+	var NumCandidatoFin = "";
+	var NumInscricaoFin = "";
+	var numCobrancaFin = "243320975";
+	
+	if (numAlunoFin != '')
+	{
+		var raw = '{"NumSeqAlunoCurso":"' + numAlunoFin + '","NumSeqCobranca":"' + numCobrancaFin + '","NumAlunoTurmaExtensao": null,"NumSeqCandidato": null,"NumInscricao": null}';
+	}
+	else if (NumAlunoTurmaExtensaoFin != '')
+	{
+		var raw = '{"NumAlunoTurmaExtensao":"' + NumAlunoTurmaExtensaoFin + '","NumSeqCobranca":"' + numCobrancaFin + '","NumSeqAlunoCurso": null,"NumSeqCandidato": null,"NumInscricao": null}';
+	}
+	else if (NumCandidatoFin != '')
+	{
+		var raw = '{"NumSeqCandidato":"' + NumCandidatoFin + '","NumSeqCobranca":"' + numCobrancaFin + '","NumAlunoTurmaExtensao": null,"NumSeqAlunoCurso": null,"NumInscricao": null}';
+	}
+	else if (NumInscricaoFin != '')
+	{
+		var raw = '{"NumInscricao":"' + NumInscricaoFin + '","NumSeqCobranca":"' + numCobrancaFin + '","NumAlunoTurmaExtensao": null,"NumSeqCandidato": null,"NumSeqAlunoCurso": null}';
+	}
+
+	var requestOptions = {
+	  method: 'POST',
+	  headers: myHeaders,
+	  body: raw,
+	  redirect: 'follow'
+	};
+
+	fetch(urlS, requestOptions)
+	  .then(response => response.text())
+	  .then((result) => {
+				var resultado = JSON.parse(result)
+				
+				console.log(resultado[0]);
+				var url = window.location.href;
+				var paramsBusca = new URLSearchParams(url);
+				var dtVencimento = "08/12/2022";
+				
+				var today = new Date();
+				var dd = today.getDate();
+				var mm = today.getMonth() + 1;
+				var yyyy = today.getFullYear();
+				if (dd < 10) {
+					dd = '0' + dd;
+				}
+				if (mm < 10) {
+					mm = '0' + mm;
+				}
+				var dataHoje = yyyy + '' + mm + '' + dd;
+			
+				var dtVencimento2 = dtVencimento;
+				dtVencimento2 = dtVencimento2.substr(6,4) + dtVencimento2.substr(3,2) + dtVencimento2.substr(0,2);
+
+				if (  dataHoje >  dtVencimento2 )
+				{
+					var vlPix = "142,37";
+				}
+				else{
+					var vlTotal = resultado[0].ValorAPagar;
+					var vlDesconto = resultado[0].ValorDesconto;
+					var vlPix = vlTotal - vlDesconto;
+					if(vlPix != "")	vlPix = formatCurr("",vlPix);
+				}
+				
+				document.getElementById("infoFinanceira").innerHTML += "<h1>Pagamento por Pix</h1><h3><b>Competência: " + resultado[0].DataMesAnoReferencia + "</b> </h3><h3><b>Vencimento: " + dtVencimento + "</b> </h3><h3><b>Valor a Pagar:</b> R$ " + vlPix + "</h3>";
+				
+			  })
+	  .catch(error => console.log('error', error));
+</script><script language="javascript" src="./Pagamento Pix_files/validacoes.js"></script></head>
+
+
+
+
+<body>  
+ 
+<div class="row">
+  	<div class="container">
+				<form name="form_pix" id="form_pix" action="https://sia.estacio.br/pix/pagamentoPix.asp" method="post">
+				
+				<div id="infoFinanceira">
+
+				<h1>Pagamento por Pix</h1><h3><b>Competência: 12/2022</b> </h3><h3><b>Vencimento: 08/12/2022</b> </h3><h3><b>Valor a Pagar:</b> R$ 142,37</h3></div>
+				
+				<div class="form-group">
+					<div class="row">
+						<div class="col-xs-10" style="margin-right:0px;">
+							<input type="text" class="form-control" name="CodCopiaCola" id="txtCodCopiaCola" readonly="" value="">
+						</div>
+						<div class="col-xs-2" style="margin-left:0px;">
+							<button class="form-control btn-info btn-clipboard" type="button" id="copy-button" data-toggle="tooltip" data-placement="button" style="color:#FFF" title="Copiar para Clipboard">
+								Copiar
+							</button>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="row">
+						<div class="col-md-12">
+							<p align="center"><img id="imgQrCode" src="https://sia.estacio.br/pix/pagamentoPix.asp" alt="QRCode" widht="200" height="200"></p>
+						</div>
+					</div>
+				</div>
+				
+				<div class="alert-info">
+					<div class="row">
+						<div class="col-md-12">
+							<p style="margin: 10 10 10 10px;"><b>Pagar com Pix é fácil e rápido!</b><br>
+							</p><ul>
+								<li style="list-style-type: circle; margin-top:10px;"> Abra o seu aplicativo Pix do seu Banco ou empresa de pagamento.<br></li>
+								<li style="list-style-type: circle; margin-top:10px;"> Clique em <b>Pagar Pix no seu aplicativo</b> e aponte a câmera para o <b>QR Code Pix</b>.<br></li>
+								<li style="list-style-type: circle; margin-top:10px;"> Pronto, agora é só finalizar o pagamento e aguardar a Aprovação.</li>
+								<li style="list-style-type: circle; margin-top:10px;"> Se preferir, <b>Copie e Cole o Código Pix</b> no seu Aplicativo ou Site Pix.</li>
+							</ul>
+							<p></p>
+						</div>
+					</div>
+				</div>
+				
+				
+			  
+		<input type="hidden" id="TPAG" name="TPAG" value="P">
+<input type="hidden" id="ORI" name="ORI" value="">
+<input type="hidden" id="COB" name="COB" value="243320975">
+<input type="hidden" id="VCT" name="VCT" value="08/12/2022">
+<input type="hidden" id="ALU" name="ALU" value="8953955">
+<input type="hidden" id="EXT" name="EXT" value="">
+<input type="hidden" id="CAN" name="CAN" value="">
+<input type="hidden" id="INS" name="INS" value="">
+<input type="hidden" id="NE" name="NE" value="">
+<input type="hidden" id="ADM" name="ADM" value="">
+<input type="hidden" id="EMAIL" name="EMAIL" value="">
+<input type="hidden" id="QRCODE" name="QRCODE" value="">
+<input type="hidden" id="LOGOMARCA" name="LOGOMARCA" value="https://sia.estacio.br/sianet/Content/estacio/SiteNovo/dist/img/logos/logo-estacio-sia-v2.png">
+<input type="hidden" id="LOGORODAPE" name="LOGORODAPE" value="">
+<input type="hidden" id="NOMEALUNO" name="NOMEALUNO" value="GUILHERME OLIVEIRA DA SILVA">
+<input type="hidden" id="REMETENTE" name="REMETENTE" value="atendimento@estacio.br">
+<input type="hidden" id="LINKINSTAGRAM" name="LINKINSTAGRAM" value="estacio_brasil/">
+<input type="hidden" id="LINKYOUTUBE" name="LINKYOUTUBE" value="c/EstacioOficial">
+<input type="hidden" id="LINKFACEBOOK" name="LINKFACEBOOK" value="br.estacio">
+<input type="hidden" id="LINKLINKEDIN" name="LINKLINKEDIN" value="school/estacio/">
+
+
+
+		
+		
+	</form>			  
+			  
+		</div>
+		
+
+</div>
+
+  <script>
+	$(document).ready(function() {
+
+	  $('#copy-button').tooltip();
+
+	  $('#copy-button').bind('click', function() {
+		var input = document.querySelector('#txtCodCopiaCola');
+		input.setSelectionRange(0, input.value.length + 1);
+		try {
+		  var success = document.execCommand('copy');
+		  if (success) {
+			$('#copy-button').trigger('copied', ['Copiado!']);
+			copyToClipboard();
+		  } else {
+			$('#copy-button').trigger('copied', ['Copie com Ctrl+C']);
+		  }
+		} catch (err) {
+		  $('#copy-button').trigger('copied', ['Copie com Ctrl+C']);
+		}
+	  });
+
+	  $('#copy-button').bind('copied', function(event, message) {
+		$(this).attr('title', message)
+			.tooltip('fixTitle')
+			.tooltip('show')
+			.attr('title', "Copiar para Clipboard")
+			.tooltip('fixTitle');
+	  });
+	  
+		$('#btn_enviar').click(function(e){
+			$('#btn_enviar').prop('disabled', true);			
+			if(validaForm()){
+				document.form.submit();
+			}else{
+				$('#btn_enviar').prop('disabled', false);	
+				return false;
+			}
+		});
+	});
+ 
+	function copyToClipboard() {
+	  /* Get the text field */
+	  var copyText = document.getElementById("txtCodCopiaCola");
+
+	  /* Select the text field */
+	  copyText.select();
+	  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+	  /* Copy the text inside the text field */
+	  document.execCommand("copy");
+
+	  /* Alert the copied text */
+	  //alert("Copied the text: " + copyText.value);
+	}
+	
+	$("#email-button").on("click", function() {
+			 $("#form_pix").action = "pagamentoPix.asp";
+			 $("#form_pix").submit();
+      });
+ <font face="Arial" size=2>
+<p>Microsoft VBScript runtime </font> <font face="Arial" size=2>error '800a000d'</font>
+<p>
+<font face="Arial" size=2>Type mismatch: 'vetor_temp_calculo'</font>
+<p>
+<font face="Arial" size=2>/pix/pagamentoPix.asp</font><font face="Arial" size=2>, line 640</font> </script></body></html>

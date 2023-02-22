@@ -1,0 +1,68 @@
+/* -----------------------------------------
+    Gateway pagamento
+----------------------------------------- */
+body { background-color: #f5f5f5; font-family: "Open Sans", sans-serif; font-size: 14px; font-weight: 400; }
+.well { background-color: #fff; border-radius: 5px; padding: 15px; box-shadow: none; border: none; display: none;}
+h1 { color: #313748; font-size: 28px; font-weight: 600; margin-top: 0; }
+h3 { color: #999; font-size: 18px; }
+
+/* custom radio */
+.radio-list { position: relative; margin-bottom: 55px; text-align: center }
+.custom-radio { display: inline-block; margin: 0 20px 40px 0; /*border: 2px solid #eaebf0;*/ padding: 2px 10px; border-radius: 3px; position: relative; }
+.custom-radio input.radio:empty { margin-left: -99999px; margin-top: 0; }
+.custom-radio input.radio:empty ~ label { position: relative; float: left; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+.custom-radio input.radio:empty ~ label::before { content: ""; position: absolute; left: 50%; bottom: -45px; transform: translate(-50%); border: 2px solid #bdbfca; border-radius: 50%; width: 18px; height: 18px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; transition: border .5s ease; }
+.custom-radio input.radio:checked ~ label::before { content: ""; position: absolute; border: 7px solid #5f81ed; }
+.custom-radio2 { display: inline-block; }
+.custom-radio2 input.radio:empty { margin-left: -99999px; margin-top: 0; }
+.custom-radio2 input.radio:empty ~ label { position: relative; float: left; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; border: 2px solid #bdbfca; border-radius: 50%; width: 18px; height: 18px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; transition: border .5s ease; }
+.custom-radio2 input.radio:checked ~ label { border: 7px solid #5f81ed; }
+
+/* table */
+.table>tbody { border-bottom: 1px solid #eeeef4; }
+.table>thead>tr>th { border-bottom: 1px solid #eeeef4; color: #bdbfca; font-weight: 600; }
+.table>tbody>tr>td { color: #313748; font-size: 16px; font-weight: 600; vertical-align: middle; }
+.table>tfoot>tr>td { color: #313748; font-size: 16px; font-weight: 600; vertical-align: middle; }
+.table>tfoot>tr>.td-total { color: #5f81ed; font-size: 24px; font-weight: 600; }
+
+/* form */
+.form-group label { color: #bdbfca; font-size: 12px; font-weight: 700; }
+.form-control { height: 48px; border: 2px solid #cfd1e0; border-radius: 5px; box-shadow: none; color: #bdbfca; font-size: 17px; font-weight: 600; }
+.form-control:focus { border-color: #5f81ed; box-shadow: none; }
+#txtNumero { position: relative; background: url("../imgs/icone-cartao.png") no-repeat no-repeat center center; background-position: 12px 12px; padding-left: 55px; }
+
+.icone-seguranca { margin: 10px 0 0; }
+.btn-primary { background-color: #5a7ede; border-radius: 3px; border-color: #5a7ede; color: #fefefe; font-size: 20px; font-weight: 600; padding: 15px 30px; transition: background-color .5s ease; }
+
+/* suporte */
+.ml { margin-left: 0; }
+.mr { margin-right: 0; }
+.fw4 { font-weight: 400!important; }
+
+.modal-body-two {
+    position: relative;
+    padding: 20%;
+}
+
+@media (min-width: 441px){
+
+    .float-left{
+        width: 50%;
+        float: left;
+    }
+}
+
+/* Desktop */
+@media (min-width: 992px) {
+    body { padding: 50px; }
+    .container { width: 730px; }
+    .well { padding: 50px; }
+
+    /* custom radio */
+    /*.custom-radio { margin: 0 20px 0 0; }*/
+
+    /* suporte */
+    .m0 { margin: 0; }
+    .ml { margin-left: 0; }
+    .mr { margin-right: 20px; }
+}
