@@ -231,21 +231,69 @@
                 <label for="favcolor">Selecione sua cor favorita:</label>
                 <input type="color" id="favcolor" name="favcolor">
                 <br>
-                <label for="birthday">Aniversário:</label>
-                <input type="date" id="birthday" name="birthday">
+                <fieldset>
+                    <label for="birthday">Aniversário:</label>
+                    <input type="date" id="birthday" name="birthday">
+                </fieldset>
             </form>
 
             <h3>Volume(type="range") e Quantidade (type="number")</h3>
             <form action="">
-                <label for="vol">Volume (between 0 and 50):</label>
-                <input type="range" id="vol" name="vol" min="0" max="50">
+                <fieldset>
+                    <label for="vol">Volume (between 0 and 50):</label>
+                    <input type="range" id="vol" name="vol" min="0" max="50">
+                </fieldset>
                 <br>
-                <label for="quantity">Quantidade:</label>
-                <input type="number" id="quantity" name="quantity" min="0" max="100" step="10">
+                <fieldset>
+                    <label for="quantity">Quantidade:</label>
+                    <input type="number" id="quantity" name="quantity" min="0" max="100" step="10">
+                </fieldset>
             </form>
             <hr>
             <a href="pagina1.html">Link para outra página</a>
         </main>
+
+        <form action="/pagina-processa-dados-do-form" method="post">
+            <fieldset>
+                <legend>Dados Gerais</legend>
+                <label for="nome">Nome:</label>
+                <input type="text" minlength="3" id="nome">
+
+                <label for="data_nascimento">Data de Nascimento:</label>
+                <input type="text" id="data_nascimento">
+
+                <label for="cpf">CPF:</label>
+                <input type="cpf" minlength="11" id="cpf">
+            </fieldset>
+            <fieldset>
+                <legend>Endereço</legend>
+
+                <label for="tipo_endereco">Tipo:</label>
+                <select id="tipo_endereco">
+                    <option value="">Selecione</option>
+                    <option value="">Rua</option>
+                    <option value="">Estrada</option>
+                    <option value="">Rodovia</option>
+                    <option value="">Outros</option>
+                </select>
+                
+                <label for="logradouro_endereco">Logradouro:</label>
+                <input type="text" id="logradouro_endereco">
+
+                <label for="complemento_endereco">Complemento:</label>
+                <input type="text" id="complemento_endereco">
+            </fieldset>
+            <fieldset>
+                <legend>Fala Conosco</legend>
+
+                <label for="msg">Mensagem:</label>
+                <textarea type="text" id="msg" placeholder="Deixe sua mensagem"></textarea>
+            </fieldset>
+            <fieldset>
+                <button type="submit">Enviar sua mensagem</button>
+                <button type="reset">Limpar o Formulário</button>
+            </fieldset>
+        </form>
 
         <footer>
             Rodapé
