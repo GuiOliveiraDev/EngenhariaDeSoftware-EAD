@@ -198,6 +198,51 @@
             
                    <audio src= “/audios/sample.ogg” controls autoplay loop></audio>
                    <video src="https://gshow.globo.com/tudo-mais/tv-e-famosos/video/leo-santana-comenta-como-surgiu-o-hit-zona-de-perigo-11350880.ghtml" controls></video>
+
+            <h2>Formularios HTML</h2>
+
+            <h3>Usuário (type="text") e Senha (type="password")</h3>
+            <form action="">
+                <label for="username">Usuário:</label>
+                <br>
+                <input type="text" id="username">
+                <br>
+                <label for="pwd">Senha:</label>
+                <br>
+                <input type="password" id="pwd" name="pwd">
+                <br>
+                <input type="submit" value="Enviar">
+            </form>
+
+            <h3>Marcação (type="radio")</h3>
+            <form action="">
+                <input type="radio" id="html" name="fav_language" value="HTML">
+                <label for="html">HTML</label>
+                <br>
+                <input type="radio" id="css" name="fav_language" value="css">
+                <label for="css">CSS</label>
+                <br>
+                <input type="radio" id="javascript" name="fav_language" value="JavaScript">
+                <label for="javascript">JavaScript</label>
+            </form>
+
+            <h3>Cor (type="color") e Data calendario (type="date")</h3>
+            <form action="">
+                <label for="favcolor">Selecione sua cor favorita:</label>
+                <input type="color" id="favcolor" name="favcolor">
+                <br>
+                <label for="birthday">Aniversário:</label>
+                <input type="date" id="birthday" name="birthday">
+            </form>
+
+            <h3>Volume(type="range") e Quantidade (type="number")</h3>
+            <form action="">
+                <label for="vol">Volume (between 0 and 50):</label>
+                <input type="range" id="vol" name="vol" min="0" max="50">
+                <br>
+                <label for="quantity">Quantidade:</label>
+                <input type="number" id="quantity" name="quantity" min="0" max="100" step="10">
+            </form>
             <hr>
             <a href="pagina1.html">Link para outra página</a>
         </main>
