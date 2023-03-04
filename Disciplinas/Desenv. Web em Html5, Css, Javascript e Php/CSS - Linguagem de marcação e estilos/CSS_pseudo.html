@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pseudo elementos e Pseudo classes</title>
+
+    <style>
+
+        div:hover{
+            background-color: #ff0808;
+        }
+        
+        p#sem_pseudo{
+            font-size: 12px;
+            color: #000000;
+        }
+        p#sem_pseudo span.primeira_letra_font_maior{
+            font-size: 26px;
+            color: #0000ff;
+        }
+
+        p#com_pseudo {
+            font-size: 12px;
+            color: #000000;
+        }
+        p#com_pseudo::first-letter{
+            font-size: 26px;
+            color: #0000ff;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div>
+        <p id="sem_pseudo">
+            <span class="primeira_letra_font_maior">T</span>exto do parágrafo sem pseudo classe.
+        </p>
+
+        <p id="com_pseudo">
+            Texto do parágrafo com pseudo classe.
+        </p>
+    </div>
+
+</body>
+</html>
